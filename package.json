@@ -3,11 +3,10 @@
 "version": "1.0.0",
 "description": "Servidor seguro para conectar con la API de fútbol",
 "main": "server.js",
-"type": "module",
 "scripts": {
 "start": "node server.js"
 },
-"dependencies": {
+sn._setImageSrc('img-SFN5ap-eLMnCp84Pz8218Ag_212','https:\/\/lens.usercontent.google.com\/image?vsrid\x3dCPyu0LTftqLJIxAEGAIiEIybuMzpcE7tkqv9aRsIXwwygAEiAm5uKA1CcgoubGZlLWR1bW15Ojg5NTZjOGM1LTg4ZTYtNDUwMi04NTlmLThiNDZjZTRjNDQ2YRJACj4vYm5zL25uL2Jvcmcvbm4vYm5zL2xlbnMtZnJvbnRlbmQtYXBpL3Byb2QubGVucy1mcm9udGVuZC1hcGkvN1oECgJubjjXqICfnJWWA1AA')"dependencies": {
 "express": "^4.19.2",
 "cors": "^2.8.5",
 "axios": "^1.7.2"

@@ -10,6 +10,22 @@ app.use(express.static(path.join(__dirname)));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.get('/api/partidos-hoy', async (req, res) => {
+    try {
+        const hoy = new Date().toISOString().split('T')[0];
+        const response = await fetch(`https://api-sports.io{hoy}`, {
+            method: 'GET',
+            headers: {
+                'x-apisports-key': 'TU_CLAVE_DE_API_AQUÍ'
+            }
+        });
+        const data = await response.json();
+        res.json(data.response);
+    } catch (error) {
+        console.error("Error en la API:", error);
+        res.status(500).json({ error: "No cargaron los partidos" });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);

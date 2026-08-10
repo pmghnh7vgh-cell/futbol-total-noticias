@@ -16,7 +16,7 @@ app.get('/api/partidos-hoy', async (req, res) => {
         const response = await fetch(`https://api-sports.io{hoy}`, {
             method: 'GET',
             headers: {
-                'x-apisports-key': 'TU_CLAVE_DE_API_AQUÍ'
+                'x-apisports-key':762fb45b5838e1bb9ca066aee860f871
             }
         });
         const data = await response.json();

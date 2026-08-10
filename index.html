@@ -306,6 +306,51 @@ footer{
 <footer>
   © 2026 Fútbol Total Noticias · Noticias y análisis de fútbol
 </footer>
+<script>
+    async function cargarPartidosEnVivo() {
+        try {
+            const respuesta = await fetch('/api/partidos-hoy');
+            const partidos = await respuesta.json();
+            const contenedor = document.querySelector('.grid');
+            
+            if (!partidos || partidos.length === 0) {
+                contenedor.innerHTML = "<p style='text-align:center; padding:20px;'>No hay partidos programados para hoy.</p>";
+                return;
+            }
+
+            contenedor.innerHTML = ""; 
+            
+            // Mostramos los primeros 3 partidos del día en vivo con escudos
+            partidos.slice(0, 3).forEach(partido => {
+                const tarjeta = document.createElement('article');
+                tarjeta.className = 'card';
+                tarjeta.innerHTML = `
+                    <div style='display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;'>
+                        <div style='text-align: center; flex: 1;'>
+                            <img src="${partido.teams.home.logo}" alt="${partido.teams.home.name}" style='width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px;'>
+                            <h4 style='color: white; font-size: 0.95rem;'>${partido.teams.home.name}</h4>
+                        </div>
+                        <span style='color: #00ff88; font-weight: bold; font-size: 1.2rem; margin: 0 10px;'>VS</span>
+                        <div style='text-align: center; flex: 1;'>
+                            <img src="${partido.teams.away.logo}" alt="${partido.teams.away.name}" style='width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px;'>
+                            <h4 style='color: white; font-size: 0.95rem;'>${partido.teams.away.name}</h4>
+                        </div>
+                    </div>
+                    <p style='color:#88a0c0; font-size:0.85rem; text-align: center;'><strong>Liga:</strong> ${partido.league.name}</p>
+                    <p style='color:#e2e8f0; font-size:0.85rem; text-align: center; margin-top:3px;'><strong>Estado:</strong> ${partido.fixture.status.long}</p>
+                    <p style='font-size:1.4rem; font-weight: bold; margin-top:10px; color:#00ff88; text-align: center;'>
+                        ${partido.goals.home ?? 0} - ${partido.goals.away ?? 0}
+                    </p>
+                `;
+                contenedor.appendChild(tarjeta);
+            });
+        } catch (error) {
+            console.error("Error cargando la automatización:", error);
+        }
+    }
+
+    window.onload = cargarPartidosEnVivo;
+</script>
 
 </body>
 </html>

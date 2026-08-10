@@ -10,13 +10,15 @@ app.use(express.static(path.join(__dirname)));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// RUTA AUTOMÁTICA: Trae los partidos del día desde API-Football
 app.get('/api/partidos-hoy', async (req, res) => {
     try {
         const hoy = new Date().toISOString().split('T')[0];
         const response = await fetch(`https://api-sports.io{hoy}`, {
             method: 'GET',
             headers: {
-                'x-apisports-key':'762fb45b5838e1bb9ca066aee860f871'
+                'x-apisports-key': '762fb45b5838e1bb9ca066aee860f871'
             }
         });
         const data = await response.json();

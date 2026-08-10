@@ -1,7 +1,7 @@
 {
 "name": "futbol-total-backend",
 "version": "1.0.0",
-"description": "Servidor seguro para conectar con la API de fútbol",
+"description": "Servidor para conectar con la API de fútbol",
 "main": "server.js",
 "scripts": {
 "start": "node server.js"

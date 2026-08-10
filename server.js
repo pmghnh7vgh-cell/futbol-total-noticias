@@ -1,5 +1,6 @@
 import express from 'express';
-import cors from 'cors'; 
+import cors from 'cors';
+import axios from 'axios'; 
 
 const app = express();
 const PORT = process.env.PORT || 3000; 
@@ -15,16 +16,14 @@ if (!apiKey) {
 return res.status(500).json({ error: 'Falta la clave de la API en el servidor' });
 }
 
-const response = await fetch('[https://v3.football.api-sports.io/fixtures?live=all](https://v3.football.api-sports.io/fixtures?live=all)', {
-method: 'GET',
+const response = await axios.get('[https://v3.football.api-sports.io/fixtures?live=all](https://v3.football.api-sports.io/fixtures?live=all)', {
 headers: {
 'x-rapidapi-key': apiKey,
 'x-rapidapi-host': 'v3.football.api-sports.io'
 }
 });
 
-const data = await response.json();
-res.json(data);
+res.json(response.data);
 
 } catch (error) {
 res.status(500).json({ error: 'Error al conectar con la API de fútbol' });
